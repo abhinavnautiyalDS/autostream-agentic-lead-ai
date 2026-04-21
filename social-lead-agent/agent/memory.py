@@ -5,4 +5,5 @@ class LeadState:
         self.email = None
         self.platform = None
 
+
 state = LeadState()

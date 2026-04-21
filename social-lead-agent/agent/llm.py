@@ -8,7 +8,7 @@ def get_llm():
         raise ValueError("GROQ_API_KEY not found in Streamlit secrets")
 
     return ChatGroq(
-        model="llama3-8b-8192",
+        model="llama-3.3-70b-versatile",
         groq_api_key=st.secrets["GROQ_API_KEY"],
         temperature=0
     )

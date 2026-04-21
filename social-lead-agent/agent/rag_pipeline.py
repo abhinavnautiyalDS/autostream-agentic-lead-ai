@@ -1,7 +1,11 @@
 import json
-from langchain_openai import ChatOpenAI
+import streamlit as st
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-llm = ChatOpenAI(model="gpt-4o-mini")
+llm = ChatGoogleGenerativeAI(
+    model="gemini-1.5-flash",
+    google_api_key=st.secrets["GEMINI_API_KEY"]
+)
 
 with open("data/knowledge_base.json") as f:
     knowledge = json.load(f)
@@ -11,14 +15,14 @@ def answer_query(question):
     context = json.dumps(knowledge)
 
     prompt = f"""
-You are AutoStream AI assistant.
+You are an AI assistant for AutoStream.
 
-Answer the user question using this knowledge base.
+Use the knowledge base below to answer the user's question.
 
-Knowledge:
+Knowledge Base:
 {context}
 
-Question:
+User Question:
 {question}
 """
 

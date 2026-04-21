@@ -17,14 +17,16 @@ def run_agent(user_message):
     if intent == "high_intent":
 
         if not state.name:
-            return "Great! May I know your name?"
+            return "Great! I'd love to help you get started. What is your name?"
 
         if not state.email:
-            return "Please provide your email."
+            return "Please provide your email address."
 
         if not state.platform:
-            return "Which platform do you create content on? (YouTube / Instagram)"
+            return "Which platform do you create content on? (YouTube, Instagram, etc.)"
 
         mock_lead_capture(state.name, state.email, state.platform)
 
-        return "Thank you! Your lead has been captured. Our team will contact you."
+        return "Perfect! Your lead has been captured. Our team will contact you shortly."
+
+    return "Could you please clarify your question?"

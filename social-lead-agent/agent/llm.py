@@ -8,10 +8,9 @@ def get_llm():
     if "GEMINI_API_KEY" not in st.secrets:
         raise ValueError("GEMINI_API_KEY not found in Streamlit secrets")
 
-    # Set environment variable required by Gemini SDK
     os.environ["GOOGLE_API_KEY"] = st.secrets["GEMINI_API_KEY"]
 
     return ChatGoogleGenerativeAI(
-        model="models/gemini-1.5-flash",
+        model="gemini-1.5-flash-latest",
         temperature=0
     )

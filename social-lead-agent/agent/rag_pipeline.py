@@ -1,9 +1,13 @@
 import json
+import os
 from agent.llm import get_llm
 
 llm = get_llm()
 
-with open("data/knowledge_base.json") as f:
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_PATH = os.path.join(BASE_DIR, "data", "knowledge_base.json")
+
+with open(DATA_PATH) as f:
     knowledge = json.load(f)
 
 

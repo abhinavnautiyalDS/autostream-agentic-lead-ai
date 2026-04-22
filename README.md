@@ -4,6 +4,33 @@
 
 ---
 
+# Live Demo
+
+**Streamlit App**
+
+You can interact with the deployed chatbot here:
+
+🔗 **Live Application:**
+https://autostream-agentic-lead-ai-ditskrqbjvt8hfvy8cjb3f.streamlit.app/
+The application allows users to:
+
+* ask questions about the AutoStream product
+* explore pricing and features
+* simulate signing up for a plan
+* automatically capture lead information through the AI agent workflow
+
+---
+
+# Demo Preview
+
+Below is a preview of the chatbot interaction.
+
+![AutoStream Demo](demo.gif)
+
+*(Replace `demo.gif` with your recorded demo GIF once uploaded to the repository.)*
+
+---
+
 # Project Overview
 
 Modern SaaS businesses receive thousands of messages daily through:
@@ -13,7 +40,7 @@ Modern SaaS businesses receive thousands of messages daily through:
 * customer support
 * creator platforms
 
-Most of these conversations contain **potential customers**, but identifying **high-intent users** manually is difficult and inefficient.
+Most of these conversations contain **potential customers**, but identifying **high-intent users** manually is inefficient and time-consuming.
 
 This project demonstrates how an **AI Agent** can automatically:
 
@@ -31,55 +58,66 @@ The system simulates a **real-world SaaS assistant** for a fictional product cal
 
 **Conversational AI Agent**
 
-The chatbot understands natural language questions and responds intelligently.
+The chatbot understands natural language queries and responds intelligently using an LLM.
 
 **Intent Detection**
 
-User messages are classified into different categories such as greeting, product inquiries, or purchase intent.
+User messages are classified into:
+
+* greeting
+* product inquiry
+* purchase intent
 
 **Retrieval-Augmented Generation (RAG)**
 
-The system retrieves answers from a knowledge base to avoid hallucination and provide consistent product information.
+Answers are generated using a structured knowledge base to ensure accurate and consistent responses.
 
 **Automated Lead Capture**
 
-When the system detects high purchase intent, it automatically collects user details such as name, email, and platform.
+When the system detects high purchase intent, it automatically collects user details such as:
+
+* name
+* email
+* creator platform
 
 **Conversation Memory**
 
-The system remembers user details across messages to complete the lead generation workflow.
+The chatbot remembers information across messages to complete the lead generation workflow.
 
 **Interactive Web Interface**
 
-A chatbot interface built using Streamlit allows real-time interaction with the AI system.
+A Streamlit chat interface provides a real-time conversational experience.
 
 ---
 
 # Problem Statement
 
-Many companies struggle to convert conversations into sales leads. Users may ask questions like:
+Businesses often lose potential customers because user conversations are not converted into actionable leads.
 
-* "What are your pricing plans?"
-* "Do you support YouTube creators?"
-* "How can I sign up?"
+Users may ask questions such as:
 
-Without automation, these potential customers often leave without converting.
+* “What are your pricing plans?”
+* “Does this work for YouTube creators?”
+* “How can I start using this?”
 
-This project solves the problem by building an **AI-powered conversational agent** that can:
+Without automation, these users leave without signing up.
+
+This project solves the problem by creating an **AI-powered conversational agent** that can:
 
 * answer product questions
 * detect purchase intent
-* collect lead information automatically
+* collect user contact information
+* simulate storing leads for future outreach
 
-This enables businesses to **scale customer acquisition without manual intervention.**
+This enables businesses to **scale customer acquisition through conversational AI**.
 
 ---
 
 # System Architecture
 
-The system follows an **agent-based architecture**.
+The system follows an **agent-based architecture** where each component performs a specific role.
 
-User messages pass through multiple modules that decide how the system should respond.
+User messages pass through multiple modules before a response is generated.
 
 ```
 User
@@ -100,8 +138,6 @@ LLM Response
 User
 ```
 
-Each module performs a specific task in the conversational pipeline.
-
 ---
 
 # Technology Stack
@@ -116,7 +152,7 @@ LangChain
 
 **Large Language Model**
 
-Groq LLM API
+Groq API
 
 **Model Used**
 
@@ -138,24 +174,29 @@ Streamlit Cloud
 
 The reasoning engine of the system is powered by a large language model.
 
-The model is responsible for:
+The model performs:
 
-* understanding natural language
-* generating responses
-* performing intent classification
-* answering questions using context
+* natural language understanding
+* conversational response generation
+* intent classification
+* contextual reasoning
 
-The project uses Groq's hosted Llama model for fast inference and reliable performance.
+The system currently uses Groq’s hosted Llama model for **fast inference and low latency**.
 
-The architecture is **model-agnostic**, meaning it can easily switch to other providers such as OpenAI, Gemini, or Anthropic.
+The architecture is **model-agnostic**, meaning it can easily switch between providers such as:
+
+* Groq
+* OpenAI
+* Gemini
+* Anthropic
 
 ---
 
 ## Intent Detection
 
-Intent detection is the **decision engine** of the system.
+Intent detection is the **decision-making layer** of the system.
 
-Each user message is classified into one of three intents:
+Each user message is classified into one of three categories:
 
 * greeting
 * product_inquiry
@@ -199,23 +240,17 @@ Intent:
 high_intent
 ```
 
-The intent classification determines the next action in the agent workflow.
+The detected intent determines the next step in the agent workflow.
 
 ---
 
 ## Retrieval-Augmented Generation (RAG)
 
-Large language models sometimes hallucinate answers.
+To ensure responses are accurate and consistent, the system uses **RAG**.
 
-To avoid this, the system uses **Retrieval-Augmented Generation**.
+Instead of relying solely on the LLM, the system retrieves information from a knowledge base.
 
-The knowledge base contains structured product information such as:
-
-* pricing plans
-* features
-* company policies
-
-Example knowledge base entry:
+Example knowledge:
 
 ```
 Basic Plan
@@ -230,29 +265,29 @@ Unlimited videos
 AI captions
 ```
 
-When a user asks a question like:
+When a user asks:
 
 ```
 What is your pricing?
 ```
 
-The system retrieves the relevant information and provides a grounded response.
+The system retrieves relevant information and generates a response using that context.
 
 Benefits of RAG:
 
 * reduces hallucinations
-* ensures factual accuracy
-* keeps answers consistent with company policies
+* ensures factual answers
+* keeps product information consistent
 
 ---
 
 ## Lead Capture Tool
 
-When the system detects **high purchase intent**, it triggers a lead capture workflow.
+When high purchase intent is detected, the system initiates a **lead capture workflow**.
 
-The agent collects the following information:
+The chatbot collects:
 
-* name
+* user name
 * email
 * creator platform
 
@@ -264,25 +299,13 @@ User:
 I want the Pro plan for my YouTube channel
 ```
 
-Agent:
+Assistant:
 
 ```
 Great! What is your name?
 ```
 
-User:
-
-```
-Name: Abhinav
-```
-
-Agent:
-
-```
-Please provide your email address
-```
-
-Once all details are collected, the system triggers the lead capture tool.
+After collecting details, the system triggers the lead capture tool.
 
 Example output:
 
@@ -290,43 +313,43 @@ Example output:
 Lead captured successfully: Abhinav, abhinav@email.com, YouTube
 ```
 
-This simulates how companies store leads in a CRM system.
+This simulates storing a lead in a CRM system.
 
 ---
 
 ## Conversation Memory
 
-The system maintains conversation state using a memory module.
+The system maintains state using a memory module.
 
-Stored variables:
+Stored attributes include:
 
-* user name
+* name
 * email
-* creator platform
+* platform
 
-This enables the agent to remember previous messages and complete the lead capture process across multiple turns.
+This allows the agent to remember previous inputs and complete the lead generation process.
 
 ---
 
 ## Agent Controller
 
-The agent controller orchestrates the entire workflow.
+The agent controller orchestrates the system logic.
 
-Example logic:
+Example workflow logic:
 
 ```
 If greeting
- → respond with welcome message
+ → send welcome message
 
 If product inquiry
- → use RAG knowledge base
+ → use RAG to answer question
 
 If high intent
  → collect lead information
  → trigger lead capture tool
 ```
 
-This makes the system **agentic rather than a simple chatbot.**
+This transforms the chatbot into an **agentic system capable of decision making**.
 
 ---
 
@@ -336,12 +359,12 @@ The user interface is built using Streamlit.
 
 Features include:
 
-* real-time chat interface
+* real-time chat interaction
 * conversation history
-* product information sidebar
-* interactive user experience
+* sidebar product information
+* interactive conversational UI
 
-The interface allows users to interact with the AI agent just like a real SaaS chatbot.
+This makes the system behave like a **real SaaS product assistant**.
 
 ---
 
@@ -385,42 +408,35 @@ Assistant:
 Great! What is your name?
 ```
 
-The agent then collects user details and stores the lead.
+The agent then collects details and captures the lead.
 
 ---
 
 # Business Impact
 
-This system can significantly improve customer acquisition.
+This system demonstrates how conversational AI can improve **customer acquisition and engagement**.
 
-Instead of manually handling conversations, companies can deploy an AI agent that:
+Benefits for businesses:
 
-* answers customer questions instantly
-* identifies high-intent users
-* captures leads automatically
-
-Benefits include:
-
-* faster customer response time
-* increased conversion rates
-* reduced workload for sales teams
+* automated lead generation
+* instant responses to user queries
+* reduced manual support workload
+* higher conversion rates
 * scalable customer engagement
+
+Instead of losing potential customers, businesses can convert conversations into **actionable leads**.
 
 ---
 
 # Real-World Applications
 
-This architecture can be applied across multiple industries.
+This architecture can be used in:
 
-Examples include:
-
-SaaS platforms capturing free trial users
-
-E-commerce stores recommending products
-
-Marketing campaigns converting social media conversations
-
+SaaS platforms capturing trial users
+E-commerce product assistants
+Marketing campaign chatbots
 Customer support automation
+Social media conversational agents
 
 ---
 
@@ -475,28 +491,28 @@ streamlit run streamlit.py
 
 ---
 
-# Key Skills Demonstrated
+# Skills Demonstrated
 
-This project demonstrates practical skills in:
+This project demonstrates skills in:
 
 * Generative AI systems
-* LLM integration
 * Retrieval-Augmented Generation
 * conversational agent design
-* AI application deployment
-* full-stack AI development
+* LLM integration
+* tool-based agent workflows
+* full-stack AI application deployment
 
 ---
 
 # Future Improvements
 
-Possible extensions include:
+Possible future enhancements include:
 
-* vector database integration (FAISS / Pinecone)
-* multi-platform integrations (WhatsApp, Slack)
-* CRM integration
-* real-time analytics dashboard
-* multi-language support
+* vector database integration (FAISS or Pinecone)
+* WhatsApp or Slack chatbot integration
+* CRM integration for real lead storage
+* analytics dashboard for lead tracking
+* multilingual conversational support
 
 ---
 
@@ -504,6 +520,6 @@ Possible extensions include:
 
 AutoStream Agentic Lead AI demonstrates how modern AI systems can transform simple conversations into meaningful business outcomes.
 
-By combining **LLM reasoning, RAG knowledge retrieval, and automated lead capture**, the system creates an intelligent conversational agent capable of assisting users while simultaneously generating potential sales leads.
+By combining **LLM reasoning, RAG knowledge retrieval, intent detection, and automated lead capture**, the system creates an intelligent conversational agent capable of assisting users while simultaneously generating potential sales leads.
 
-This architecture reflects how real-world AI assistants are built and deployed in modern SaaS products.
+This project reflects how **real-world conversational AI systems are built and deployed in modern SaaS platforms.**
